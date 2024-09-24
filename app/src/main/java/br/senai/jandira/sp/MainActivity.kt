@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.senai.jandira.sp.screens.Home
 import br.senai.jandira.sp.screens.Password
 import br.senai.jandira.sp.ui.theme.ProvestTheme
 
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController = navigationController, startDestination = "password") {
                         composable(route = "password"){
-                            Password(navigationController)
+                            Home(navigationController)
                         }
                     }
                 }
