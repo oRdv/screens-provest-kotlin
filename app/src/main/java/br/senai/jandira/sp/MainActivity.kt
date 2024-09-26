@@ -12,7 +12,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.senai.jandira.sp.screens.Home
-import br.senai.jandira.sp.screens.Password
 import br.senai.jandira.sp.ui.theme.ProvestTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,16 +26,13 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navigationController = rememberNavController()
 
-                    NavHost(navController = navigationController, startDestination = "password") {
-                        composable(route = "password"){
-                            Home(navigationController)
+                    NavHost(navController = navigationController, startDestination = "home") {
+                        composable(route = "home") {
+                            Home() // Chama a tela Home que você criou
                         }
                     }
                 }
             }
         }
     }
-
-    }
-
-
+}
