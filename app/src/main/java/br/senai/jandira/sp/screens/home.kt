@@ -73,29 +73,108 @@ fun Home() {
     val formatter = DateTimeFormatter.ofPattern("dd MMM", Locale("pt", "BR"))
     val formattedDate = currentDate.format(formatter)
     val scrollState = rememberScrollState()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Open)
     val scope = rememberCoroutineScope()
 
     val drawerContent = @Composable {
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(16.dp)
-            ) {
-                Text("Bem-vindo, Celso!", fontSize = 24.sp, color = Color.Black)
+        Column(
+            modifier = Modifier
+                .width(295.dp)
+                .background(Color(0xFFFFFFF1))
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
 
-                DrawerMenuItem(icon = Icons.Default.Task, text = "Tarefas")
-                DrawerMenuItem(icon = Icons.Default.Chat, text = "Chats")
-                DrawerMenuItem(icon = Icons.Default.Settings, text = "Configurações")
-                DrawerMenuItem(icon = Icons.Default.Search, text = "Calendário")
-                DrawerMenuItem(icon = Icons.Default.Videocam, text = "Vídeo-Aulas")
-                DrawerMenuItem(icon = Icons.Default.Book, text = "Matérias")
-                DrawerMenuItem(icon = Icons.Default.CollectionsBookmark, text = "Redações")
-                DrawerMenuItem(icon = Icons.Default.Person, text = "Perfil")
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "Avatar",
+                    tint = Color(0xFF201F4B),
+                    modifier = Modifier.size(40.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Bem-vindo, ",
+                    color = Color.Black,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 18.sp
+                )
+                Text(
+                    text = "Celso!",
+                    color = Color(0xFFB98BB6),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.CenterEnd
+                ) {
+                    IconButton(onClick = {  }) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "Fechar Drawer",
+                            tint = Color(0xFFB98BB6),
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
+            }
+
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Itens do menu
+            DrawerMenuItem(Icons.Default.Task, "Tarefas")
+            DrawerMenuItem(Icons.Default.Chat, "Chats")
+            DrawerMenuItem(Icons.Default.Settings, "Configurações")
+            DrawerMenuItem(Icons.Default.Search, "Escolha curso")
+            DrawerMenuItem(Icons.Default.CalendarToday, "Calendário")
+            DrawerMenuItem(Icons.Default.Videocam, "Vídeo-Aulas")
+            DrawerMenuItem(Icons.Default.Bookmark, "Matérias")
+            DrawerMenuItem(Icons.Default.Description, "Redações")
+            DrawerMenuItem(Icons.Default.Person, "Perfil")
+
+            Spacer(modifier = Modifier.weight(1f))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ExitToApp,
+                    contentDescription = "Logout",
+                    tint = Color(0xFFB20000),
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Logout",
+                    color = Color(0xFFB20000),
+                    fontSize = 16.sp
+                )
+
+                Row(
+                    modifier = Modifier.padding(start = 150.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.provest),
+                        contentDescription = "logo",
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clickable {
+
+                            }
+                    )
+                }
+
             }
         }
+    }
 
-    ModalDrawer(
+    ModalNavigationDrawer(
         drawerState = drawerState,
         gesturesEnabled = true,
         drawerContent = drawerContent
@@ -542,57 +621,29 @@ fun Home() {
     }
 }
 
-@SuppressLint("UnusedBoxWithConstraintsScope")
-@Composable
-fun ModalDrawer(
-    drawerState: DrawerState,
-    gesturesEnabled: Boolean,
-    drawerContent: @Composable () -> Unit,
-    content: @Composable () -> Unit
-) {
-    Box{
-        Row {
-            if (drawerState.isOpen) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(250.dp)
-                ) {
-                    drawerContent()
-                }
-            }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(start = if (drawerState.isOpen) 0.dp else 0.dp)
-            ) {
-                content()
-            }
-        }
-    }
-}
 
 @Composable
 fun DrawerMenuItem(icon: ImageVector, text: String) {
     Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(vertical = 8.dp)
+            .background(Color(0xFFE4E2ED), shape = RoundedCornerShape(8.dp))
+            .padding(16.dp)
     ) {
         Icon(
             imageVector = icon,
-            contentDescription = null,
-            modifier = Modifier.size(24.dp),
-            tint = Color.Black
+            contentDescription = text,
+            tint = Color.Black,
+            modifier = Modifier.size(24.dp)
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(
             text = text,
-            fontSize = 16.sp,
             color = Color.Black,
-            textAlign = TextAlign.Start
+            fontSize = 16.sp
         )
     }
 }

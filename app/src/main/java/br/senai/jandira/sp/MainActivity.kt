@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.senai.jandira.sp.screens.Home
+import br.senai.jandira.sp.screens.Submaterials
 import br.senai.jandira.sp.ui.theme.ProvestTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController = navigationController, startDestination = "home") {
                         composable(route = "home") {
-                            Home() // Chama a tela Home que você criou
+                            Submaterials() // Chama a tela Home que você criou
                         }
                     }
                 }
