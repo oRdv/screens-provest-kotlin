@@ -73,7 +73,7 @@ fun Home() {
     val formatter = DateTimeFormatter.ofPattern("dd MMM", Locale("pt", "BR"))
     val formattedDate = currentDate.format(formatter)
     val scrollState = rememberScrollState()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Open)
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
     val drawerContent = @Composable {
